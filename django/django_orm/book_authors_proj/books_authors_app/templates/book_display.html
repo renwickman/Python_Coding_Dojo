@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Book Display</title>
+    <style>
+        * {
+            text-align: left;
+        }
+        table {
+            text-align: center;
+            margin-left: 452px;
+        }
+    </style>
+</head>
+<body>
+    
+    <p>{{book.title}}</p>
+    <p>ID: {{book.id}}</p>
+    <p>Description: {{book.desc}}</p>
+
+    <p>Authors:</p>
+    <ul>
+    {% for author in book.authors.all %}
+    <p><li>{{author.first_name}} {{author.last_name}}</li></p>
+    {% endfor %}
+    </ul>
+    
+    <form action="/authors/{{book.id}}/showAuthor" method="POST">
+        {% csrf_token %}
+        <select name="author_id">
+            {% for author in all_authors %}
+            {% if author not in book.authors.all%}
+            <option value="{{ author.id }}">{{author.first_name}} {{author.last_name}}</option>
+            {% endif %} 
+            {% endfor %}
+        </select>
+        <input type="submit" class="btn btn-success" value="Add">
+    </form>
+
+
+</body>
+</html>

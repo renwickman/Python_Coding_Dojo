@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Info</title>
+</head>
+<body>
+    <h2>Name: {{cat.name}}</h2>
+    <h2>Owner: {{cat.user.name}}</h2>
+    <h2>Number of Votes: {{cat.users_who_voted_for.count}}</h2>
+    <h2>People who voted for {{cat.name}}:</h2>
+    {% for user in cat.users_who_voted_for.all %}
+        <p>{{user.name}}</p>
+    {% endfor %}
+</body>
+</body>
+</html>

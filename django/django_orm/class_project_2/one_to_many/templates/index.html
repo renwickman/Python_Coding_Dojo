@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Add a Student or Teacher</title>
+    <style>
+        form {
+            display: inline-block;
+            vertical-align: top;
+            width: 40%;
+        }
+    </style>
+</head>
+<body>
+    
+        
+        
+        <form action="/student" method="POST">
+            {% csrf_token %}
+        <h2>Add a Student</h2>
+        <p>Name <input type="text" name="student_name"></p> 
+        <p>Catchphrase <input type="text" name = "catchphrase"></p>
+        <p>Teacher
+            
+            <select name="teacher_name">
+                {% for teacher in all_teachers %}
+            <option value={{teacher.id}}>{{teacher.name}}</option>
+            {% endfor %}
+          </select>
+          <p><input type="submit" class="btn btn-success"></p>
+        </form>
+    
+        
+        <form action="/teacher" method="POST">
+        <h2>Add a Teacher</h2>
+            {% csrf_token %}
+        <p>Name <input type="text" name="teacher_name"></p> 
+        <p>Age <input type="number" name = "age"></p>
+        <p><input type="submit" class="btn btn-success"></p>
+        </form>
+        
+    
+    <div>
+        <h2>All the Teachers</h2>
+        <ul>
+            {% for teacher in all_teachers %}
+            <li>{{teacher.name}} {{teacher.students.count}}
+                <form action="/delete/{{teacher.id}}" method="POST">
+                    {% csrf_token %}
+                <input type="submit" value="delete" class="btn btn-danger">
+                </form>
+                <ul>
+                    {% for student in teacher.students.all %}
+                    <li><em>{{student.name}}</em></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

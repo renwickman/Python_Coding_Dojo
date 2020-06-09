@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>Ninja Gold</title>
+    <style>
+        form {
+            width: 200px;
+            height: 145px;
+            background-color: lightgray;
+            display: inline-block;
+            text-align: center;
+            line-height: -20px;
+            padding-top: 52px;
+        }
+        .your_gold {
+            margin-top: 20px;
+            margin-bottom: 50px;
+        }
+        #clear {
+            display: inline-block;
+            text-align: center;
+        }
+        .record {
+            height: 100px;
+            width: 300px;
+            overflow: scroll;
+        }
+        .green {
+            color: green;
+        }
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class= your_gold>
+    Your Gold: {{request.session.num}}
+    
+    </div>
+    <div>
+    <form action="/process_money" method="POST">
+        {% csrf_token %}
+        Farm <br><br>
+        <input type="hidden" name="building" value="farm">
+        <input type="submit" value= "Find Gold!">
+    </form>
+
+    <form action="/process_money" method="POST">
+        {% csrf_token %}
+        Cave <br><br>
+        <input type="hidden" name="building" value="cave">
+        <input type="submit" value= "Find Gold!">
+    </form>
+
+    <form action="/process_money" method="POST">
+        {% csrf_token %}
+        House <br><br>
+        <input type="hidden" name="building" value="house">
+        <input type="submit" value= "Find Gold!">
+    </form>
+
+    <form action="/process_money" method="POST">
+        {% csrf_token %}
+        Casino <br><br>
+        <input type="hidden" name="building" value="casino">
+        <input type="submit" value= "Find Gold!">
+    </form>
+    </div>
+
+    <p>
+
+    <form id = clear action="/destroy" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Clear Session" />
+    </form> 
+</p>
+<p>
+    <div class="record">
+        {% for x in request.session.activity reversed %}
+        {% if "gained" in x %}
+        <p class="green">{{x}}</p>
+        {% else %}
+        <p class="red">{{x}}</p>
+        {% endif %}
+        {% endfor %}
+    </div>
+</p>
+
+</body>
+</html>

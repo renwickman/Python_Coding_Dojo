@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Amadon</title>
+</head>
+<body>
+    <div class="jumbotron">
+    <h1 class="display-4">Amadon Store!</h1>
+    <table>
+        <thead>
+            <tr>
+                <th class="lead">Item</th>
+                <th class="lead">Price</th>
+                <th class="lead">Quantity</th>
+                <th class="lead">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in all_items %}
+            <tr>
+                <td>{{item.item}}</td>
+                <td>{{item.price}}</td>
+                <form action="/cart" method="POST">
+                    {% csrf_token %}
+                    <td><select name="quantity">
+                        <option value="1">1</option>              
+                        <option value="2">2</option>              
+                        <option value="3">3</option> 
+                        <option value="4">4</option>
+                        <option value="5">5</option>  
+                        <option value="6">6</option>  
+                        <option value="7">7</option>  
+                        <option value="8">8</option>  
+                        <option value="9">9</option>  
+                        <option value="10">10</option>             
+                    </select></td>
+                    <td><input type="submit" value="Buy!"></td>
+                    <input type='hidden' name='item_id' value={{item.id}} />
+                </form>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

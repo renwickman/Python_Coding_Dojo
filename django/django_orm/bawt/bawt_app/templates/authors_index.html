@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create an Author</title>
+</head>
+<body>
+    <h1>Create an Author</h1>
+    <!-- Made a new form action to send my form data to, so I will go to my urls.py to add the route in -->
+    <form action="/authors" method="POST">
+        {% csrf_token %}
+        First Name: <input type="text" name="first_name" >
+        Last Name: <input type="text" name="last_name" >
+        Notes: <input type="text" name="notes" >
+        <input type="submit" value="Add Author" >
+    </form>
+    <h1>All the Authors</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+        {% for author in all_authors %} <!-- Each one of my Author instances is called "author" -->
+            <tr>
+                <td>{{author.id}}</td> <!-- Getting attributes of each of my Author instances -->
+                <td>{{author.first_name}} {{author.last_name}}</td>
+                <td><a href="/authors/{{author.id}}">View</a></td> <!-- Using the Author IDs to make each route unique and just for THAT one Book -->
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="/">Go to Books Page</a>
+</body>
+</html>

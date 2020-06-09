@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+</head>
+<body>
+    <h1>I have been to this page {{session['num']}} time(s)</h1>
+
+    <form action="/destroy_session">
+        <input type="submit" value="Clear Session" />
+    </form> 
+</body>
+</html>

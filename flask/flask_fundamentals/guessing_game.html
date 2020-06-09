@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guessing Game</title>
+    <style>
+        .guess_box {
+            text-align: center;
+        }
+        #high {
+            background-color: red;
+            color: white;
+            width: 154px;
+            height: 50px;
+            margin-left: 443px;
+            padding-top: 28px;
+            border: 1px solid black;
+        }
+        #low { 
+            background-color: red;
+            color: white;
+            width: 154px;
+            height: 50px;
+            margin-left: 443px;
+            padding-top: 28px;
+            border: 1px solid black;
+            }
+        .win {
+            background-color: green;
+            color: white;
+            width: 154px;
+            height: 50px;
+            margin-left: 443px;
+            padding-top: 28px;
+            border: 1px solid black;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="guess_box">
+    <p><h1>Welcome to the Guessing Game</h1></p>
+
+    <div ></div>
+
+    <p>I am thinking of a number between 1 and 100.<br>
+    Take a Guess!</p>
+
+
+    {% if session.message=="Too High" %}
+    <p id="high">{{session.message}}</p>
+
+    {% elif session.message=="Too Low" %}
+    <p id="low">{{session.message}}</p>
+
+
+   {% elif "You Won!" in session.message %}
+    <p class="win">{{session.message}}</p>
+    <form class="win" action="/reset">
+        <input type="submit" value="reset" />
+    </form>
+   {% endif %}
+
+   <p>
+    <form action="/guess" method="POST">
+    <input type="text" name="number">
+
+    <input type="Submit" value="Button"/></form>
+    </div>
+</p>
+
+</body>
+</html>

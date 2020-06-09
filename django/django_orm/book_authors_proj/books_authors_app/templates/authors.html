@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>SHOES!</title>
+    <style>
+        * {
+            text-align: left;
+        }
+        table {
+            text-align: center;
+            margin-left: 452px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <p><h2>Add an Author</h2></p>
+        <form action="/authorAction" method="POST">
+                {% csrf_token %}
+            
+            <p>First Name <input type="text" name="first_name"></p> 
+            <p>Last Name <input type="text" name="last_name"></p>
+            <p>Notes <textarea rows="10" cols="50" name="notes"></textarea></p>
+            <p><input type="submit" class="btn btn-success"></p>
+            </form>
+            
+    
+            <table>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Action</th>
+                </tr>
+                {% for authors in all_authors %}
+                <tr>
+                  <td>{{authors.id}}</td>
+                  <td>{{authors.first_name}} {{authors.last_name}}</td>
+                  <td><a href="/authors/{{authors.id}}">View</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+    
+</body>
+</html>

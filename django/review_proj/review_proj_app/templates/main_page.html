@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <h1>Hello <a href="/profile"> {{request.session.user}}</a> !</h1> <!-- Show the name of whoever is logged in instead of the ______ -->
+    <a href="/logout">Fake Logout to go back to login page</a> <!-- Ease of access, don't worry about changing this, but know how to do a logout! -->
+    <h1>Vote for the Cutest Cat of 2020!</h1>
+    <div class="container-fluid">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Owner's Name</th>
+            <th>Votes</th>
+            <th>Actions</th>
+        </tr>
+        <tbody>
+            {% for cat in all_cats %}
+            <tr>
+                <td><a href="/cats/{{cat.id}}">{{cat.name}}</a></td>
+                <td>{{cat.user.name}}</td>
+                <td>{{cat.users_who_voted_for.count}} vote(s)</td>
+                <td>
+                    {% if user not in cat.users_who_voted_for.all %}
+                        <form action="/vote/{{cat.id}}" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" value="Vote for {{cat.name}}">   
+                        </form>
+                    {% else %}
+                    <form action="/unvote/{{cat.id}}" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value="Unvote for {{cat.name}}">   
+                    </form>
+                    {% endif %}
+                    {% if cat.user == user %}
+                        <form action="/delete/{{cat.id}}" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" value="Delete {{cat.name}}">                     
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <!-- Finish out this table by showing all the Cats, leave Actions blank for now -->
+    </table>
+</div>
+
+    <h1>Submit a Cat</h1>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{message}}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form action="/cats" method="POST">
+        {% csrf_token %}
+    
+    <p>Name <input type="text" name="name"></p> 
+   
+    <p><input type="submit" class="btn btn-success" value="Add Cat"></p>
+    </form>
+
+    <!-- Put a form here that will create a Cat, I have already given you a path and a views function to use -->
+    <!-- Show error messages if there is a problem -->
+</body>
+</html>

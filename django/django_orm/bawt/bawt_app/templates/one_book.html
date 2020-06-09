@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View One Book</title>
+</head>
+<body>
+    <h1>{{book.title}}</h1>
+    <h2>ID: {{book.id}}</h2>
+    <h2>Description: {{book.description}}</h2>
+
+    <h3>All Authors of {{book.title}}</h3>
+    {% for author in book.authors.all %}
+        <p>{{author.first_name}} {{author.last_name}}</p>
+    {% endfor %}
+
+    <h3>Add an Author</h3>
+    <form action="/addAuthor/{{book.id}}" method="POST"> <!-- Passing in Book ID for 1/2 of relationship -->
+        {% csrf_token %}
+        <select name="author_id"> <!-- Key name of Author ID for 1/2 of relationship -->
+            {% for author in all_authors %}
+                {% if author not in book.authors.all %}
+                    <option value="{{author.id}}">{{author.first_name}} {{author.last_name}}</option> <!-- Value holds the ID of the Author -->
+                {% endif %}
+            {% endfor %}
+        </select>
+        <input type="submit" value="Add Author" >
+    </form>
+    <a href="/">Back to Books Page</a>
+</body>
+</html>

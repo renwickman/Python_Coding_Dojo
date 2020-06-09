@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+    <title>New_Show</title>
+</head>
+<body>
+   <p><h1>Add a New Show</h1></p>
+
+   {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{message.tags}}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  
+
+   <form action="/createShow" method="POST">
+    {% csrf_token %}
+
+   <p><h3>Title</h3><input placeholder="Title" type="text" name="title"></p> 
+
+   <p><h3>Network</h3><input placeholder="Network" type="text" name="network"></p> 
+
+   <p><h3>Release Date</h3><input type="date" name="release"></p>
+   <img src="https://img.icons8.com/cotton/2x/calendar.png" width="50px" height="50px" alt="calendar">
+   <br>
+   <p><h3>Description</h3></p>
+
+   <p><textarea placeholder="Add a Description" rows="10" cols="50" name="desc"></textarea></p>
+
+   <p><input type="submit" class="btn btn-success" value="Create"></p>
+
+    </form>
+</body>
+</html>

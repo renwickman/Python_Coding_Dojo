@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>SHOES!</title>
+    <style>
+        * {
+            text-align: center;
+        }
+        table {
+            text-align: center;
+            margin-left: 452px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>All the Shoes</h2>
+            <table>
+                <tr>
+                  <th>ID</th>
+                  <th>Brand</th>
+                  <th>Size</th>
+                  <th>Style</th>
+                </tr>
+                {% for shoe in all_shoes %}
+                <tr>
+                  <td>{{shoe.id}}</td>
+                  <td>{{shoe.brand}}</td>
+                  <td>{{shoe.size}}</td>
+                  <td>{{shoe.style}}</td>
+                  <td>
+                      <form action="/delete/{{shoe.id}}" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value="delete" class="btn btn-danger">
+                    </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+    </div>
+    <div>
+        <h2>Add a User</h2>
+        <form action="/process" method="POST">
+            {% csrf_token %}
+        <p>Brand <input type="text" name="brand"></p> 
+        <p>Size <input type="text" name = "size"></p>
+        <p>Style <input type="text" name="style"></p>
+        <input type="submit" class="btn btn-success">
+    </div></form>
+</body>
+</html>

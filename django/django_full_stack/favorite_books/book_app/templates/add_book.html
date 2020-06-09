@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a Book</title>
+</head>
+<style>
+    .add {
+        display: inline-block;
+    }
+    .all{
+        display: inline-block;
+        margin-left: 50px;
+    }
+</style>
+<body>
+    <header>
+        Welcome, {{request.session.first_name}}
+        <a href="/logout">Logout</a>
+    </header>
+    <div class="add">
+    <h1>Add a Favorite Book</h1>
+    <form action="add_book" method="POST">
+        Title <input type="text" name="title">
+        Description<input type="text" name="desc">
+        <input type="submit" value="Add">
+    </form>
+    </div>
+
+    <div class="all">
+        <h1>All Books</h1>
+        {% for book in all_books %}
+        {{book.title}}
+        {{book.desc}}
+        <p><a href="/books/{{book.id}}">{{cat.name}}</a></p>
+        {% endfor %}
+    </div>
+</body>
+</html>

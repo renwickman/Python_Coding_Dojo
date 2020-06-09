@@ -1,0 +1,69 @@
+
+Query-Create 3 new dojos:
+Dojo.objects.create(name="Dojo_Black", city="Seattle", state="WA")
+Dojo.objects.create(name="Dojo_Red", city="Chicago", state="IL")
+Dojo.objects.create(name="Dojo_Blue", city="San Francisco", state="CA")
+
+
+Query-Delete those 3 dojos:
+c = Dojo.objects.get(id=1)
+c.delete()
+c = Dojo.objects.get(id=2)
+c.delete()
+c = Dojo.objects.get(id=3)
+c.delete()
+
+
+Query-Create 3 new dojos:
+Dojo.objects.create(name="Dojo_Green", city="Dallas", state="TX")
+Dojo.objects.create(name="Dojo_Yellow", city="Arlington", state="VA")
+Dojo.objects.create(name="Dojo_Purple", city="Seattle", state="WA")
+
+
+Query-Assign 3 ninjas to 1st dojo:
+green_dojo = Dojo.objects.get(id=4)
+Ninja.objects.create(first_name="Hal", last_name="Jordan", dojo=green_dojo)
+<Ninja: Ninja object (1)>
+Ninja.objects.create(first_name="Bruce", last_name="Wayne", dojo=green_dojo)
+<Ninja: Ninja object (2)>
+Ninja.objects.create(first_name="Clark", last_name="Kent", dojo=green_dojo)
+<Ninja: Ninja object (3)>
+
+Query-Assign 3 ninjas to 2nd dojo:
+yellow_dojo = Dojo.objects.get(id=5)
+Ninja.objects.create(first_name="Peter", last_name="Parker", dojo=yellow_dojo)
+<Ninja: Ninja object (4)>
+Ninja.objects.create(first_name="Steve", last_name="Rogers", dojo=yellow_dojo)
+<Ninja: Ninja object (5)>
+Ninja.objects.create(first_name="Tony", last_name="Stark", dojo=yellow_dojo)
+<Ninja: Ninja object (6)>
+
+
+Query-Assign 3 ninjas to 3rd dojo:
+purple_dojo = Dojo.objects.get(id=6)
+Ninja.objects.create(first_name="Donald", last_name="Cerrone", dojo=purple_dojo)
+<Ninja: Ninja object (7)>
+Ninja.objects.create(first_name="Tony", last_name="Ferguson", dojo=purple_dojo)
+<Ninja: Ninja object (8)>
+Ninja.objects.create(first_name="Nate", last_name="Diaz", dojo=purple_dojo)
+<Ninja: Ninja object (9)>
+
+
+Query-Retrieve all ninjas from first dojo:
+Ninja.objects.filter(dojo=green_dojo)
+<QuerySet [<Ninja: Ninja object (1)>, <Ninja: Ninja object (2)>, <Ninja: Ninja object (3)>]>
+
+
+Query-Retrieve all ninjas from third dojo:
+Ninja.objects.filter(dojo=purple_dojo)
+<QuerySet [<Ninja: Ninja object (7)>, <Ninja: Ninja object (8)>, <Ninja: Ninja object (9)>]>
+
+
+Query-Retrieve the last ninja's dojo:
+this_ninja = Ninja.objects.get(id=9)
+this_ninja.dojo.name
+'Dojo_Purple'
+
+Query-Create a new dojo:
+Dojo.objects.create(name="Dojo_White", city="Tulsa", state="OK")
+<Dojo: Dojo object (7)>

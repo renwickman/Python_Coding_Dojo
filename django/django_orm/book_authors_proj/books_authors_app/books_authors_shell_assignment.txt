@@ -1,0 +1,77 @@
+Query: Create 5 books with the following names: C Sharp, Java, Python, PHP, Ruby
+book_1 = Book.objects.create(title="C Sharp", desc="")
+book_2 = Book.objects.create(title="Java", desc="")
+book_3 = Book.objects.create(title="Python", desc="")
+book_4 = Book.objects.create(title="PHP", desc="")
+book_5 = Book.objects.create(title="Ruby", desc="")
+
+Query: Create 5 different authors: Jane Austen, Emily Dickinson, Fyodor Dostoevsky, William Shakespeare, Lao Tzu
+author_1 = Authors.objects.create(first_name="Jane", last_name="Austen")
+author_2 = Authors.objects.create(first_name="Emily", last_name="Dickinson")
+author_3 = Authors.objects.create(first_name="Fyodor", last_name="Dostoevsky")
+author_4 = Authors.objects.create(first_name="William", last_name="Shakespeare")
+author_5 = Authors.objects.create(first_name="Lao", last_name="Tzu")
+
+
+Query: Change the name of the C Sharp book to C#
+book_1.title = "C #"
+book_1.save()
+
+
+Query: Change the first name of the 4th author to Bill
+author_4.first_name = "Bill"
+author_4.save()
+
+
+Query: Assign the first author to the first 2 books
+book_1.authors.add(author_1)
+book_2.authors.add(author_1)
+
+
+Query: Assign the second author to the first 3 books
+book_1.authors.add(author_2)
+book_2.authors.add(author_2)
+book_3.authors.add(author_2)
+
+Query: Assign the third author to the first 4 books
+book_1.authors.add(author_3)
+book_2.authors.add(author_3)
+book_3.authors.add(author_3)
+book_4.authors.add(author_3)
+
+Query: Assign the fourth author to the first 5 books (or in other words, all the books)
+for book in Book.all:
+    book_1.authors.add(author_4)
+    book_2.authors.add(author_4)
+    book_3.authors.add(author_4)
+    book_4.authors.add(author_4)
+    book_5.authors.add(author_4)
+
+    - or -
+
+    author_4.books.add(book_1,book_2,book_3,book_4,book_5)
+
+Query: Retrieve all authors for the 3rd book
+    book_3.authors.all()
+    <QuerySet [<Authors: Authors object (2)>, <Authors: Authors object (3)>, <Authors: Authors object (4)>]>
+
+
+Query: Remove the first author of the 3rd book
+    book_3.authors.remove(author_2)
+    <QuerySet [<Authors: Authors object (3)>, <Authors: Authors object (4)>]>
+
+
+Query: Add the 5th author as one of the authors of the 2nd book
+    book_2.authors.add(author_5)
+    book_2.authors.all()
+    <QuerySet [<Authors: Authors object (1)>, <Authors: Authors object (2)>, <Authors: Authors object (3)>, <Authors: Authors object (4)>, <Authors: Authors object (5)>]>
+
+
+Query: Find all the books that the 3rd author is part of
+    author_3.books.all()
+    <QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>]>
+
+
+Query: Find all the authors that contributed to the 5th book
+    book_5.authors.all()
+    <QuerySet [<Authors: Authors object (4)>]>

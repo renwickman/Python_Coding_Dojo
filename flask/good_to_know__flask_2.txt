@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  <table style="width:100%">
+        <tr>
+          <th>first_name</th>
+          <th>last_name</th>
+          <th>age</th>
+        </tr>
+        <tr>
+          <td>Michael</td>
+          <td>Cho</td>
+          <td>50</td>
+        </tr>
+        <tr>
+          <td>Eve</td>
+          <td>Jackson</td>
+          <td>94</td>
+        </tr>
+      </table>
+
+
+'Undefined' object cannot be interpreted as an integer
+
+  <h1>Random Numbers</h1>
+    {% for number in random_numbers: %}
+        <p>{{ number }}</p>
+    {% endfor %}
+
+    <h1>Students</h1>
+    {% for student in students %}
+        <p>{{ student['name'] }} - {{ student['age'] }}</p>
+    {% endfor %}
+
+    users_info = [
+        {'first_name' : 'Michael', 'last_name' : 'Choi'},
+        {'first_name' : 'John', 'last_name' : 'Supsupin'},
+        {'first_name' : 'Mark', 'last_name' : 'Guillen'},
+        {'first_name' : 'KB', 'last_name' : 'Tonel'}
+        ]
+        return render_template("html_table.html", users = users_info)
+
+
+if request.form["building"] == "farm"
+temp = random.randInt(10,20)
+session["num"] += temp
+session["activity"].append("you gained ") + str(temp) + " gold"
+
+"you gained " + str(caveNum) + " gold"
+
+if request.form['building']=='casino':         
+session['user_gold']=random.randint(-50,50)         
+session['user_gold_sum']=session['user_gold']+session['user_gold_sum']         
+session['message']=request.form['building']         
+if session['user_gold']<0:             
+session['user_gold']*=-1             
+session['activity_log'].append(                 
+f"Lost {session['user_gold']} golds from {session['message']}! ({dtime})")          
+else:             
+session['activity_log'].append(             
+f"Earned {session['user_gold']} golds from {session['message']}! ({dtime})")         
+return redirect('/')
+<div class="activities">

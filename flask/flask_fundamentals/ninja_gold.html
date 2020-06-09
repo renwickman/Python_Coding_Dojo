@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja Gold</title>
+    <style>
+        form {
+            width: 200px;
+            height: 145px;
+            background-color: lightgray;
+            display: inline-block;
+            text-align: center;
+            line-height: -20px;
+            padding-top: 52px;
+        }
+        .your_gold {
+            margin-top: 20px;
+            margin-bottom: 50px;
+        }
+        #clear {
+            display: inline-block;
+            text-align: center;
+        }
+        .gained {
+            color: green
+        }
+    </style>
+</head>
+<body>
+    <div class= your_gold>
+    Your Gold: {{session ['num']}}
+
+    </div>
+    <div>
+    <form action="/process_money" method="POST">
+        Farm <br><br>
+        <input type="hidden" name="building" value="farm">
+        <input type="submit" value= "Find Gold!">
+    </form>
+
+    <form action="/process_money" method="POST">
+        Cave <br><br>
+        <input type="hidden" name="building" value="cave">
+        <input type="submit" value= "Find Gold!">
+    </form>
+
+    <form action="/process_money" method="POST">
+        House <br><br>
+        <input type="hidden" name="building" value="house">
+        <input type="submit" value= "Find Gold!">
+    </form>
+
+    <form action="/process_money" method="POST">
+        Casino <br><br>
+        <input type="hidden" name="building" value="casino">
+        <input type="submit" value= "Find Gold!">
+    </form>
+    </div>
+
+    <p>
+
+    <form id = clear action="/destroy_session">
+        <input type="submit" value="Clear Session" />
+    </form> 
+</p>
+<p>
+    <textarea rows="4" cols="100">
+        {% for x in session.activity|reverse%}
+        {% if "gained" in x %}
+        <div class="gained"{{x}}></div>
+        
+        {% endfor %}
+    </textarea>
+</p>
+
+</body>
+</html>

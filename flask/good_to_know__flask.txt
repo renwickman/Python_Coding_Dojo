@@ -1,0 +1,55 @@
+<!-- {% for x in range(0, times): %}
+    <p>{{phrase}}</p>
+{% endfor %}
+
+{% if phrase == "hello" %}
+    <p>{phrase: Say Hello}</p>
+{% endif %} -->
+
+
+
+from flask import Flask, render_template  # added render_template!
+app = Flask(__name__)                     
+    
+@app.route('/')                           
+def hello_world():
+    # Instead of returning a string, 
+    # we'll return the result of the render_template method, passing in the name of our HTML file
+    return render_template('index.html')  
+    
+if __name__=="__main__":
+    app.run(debug=True)             
+
+return str(number) + (name+", ")      
+
+
+
+# @app.route("/play/<int:number>")
+# def number():
+#     return render_template('play_index.html')
+
+# @app.route("/play/<int:number>/<color>")
+# def color():
+#     return render_template('play_index.html')
+
+
+@app.route('/lists')
+def render_lists():
+    # Soon enough, we'll get data from a database, but for now, we're hard coding data
+    student_info = [
+       {'name' : 'Michael', 'age' : 35},
+       {'name' : 'John', 'age' : 30 },
+       {'name' : 'Mark', 'age' : 25},
+       {'name' : 'KB', 'age' : 27}
+    ]
+    return render_template("lists.html", random_numbers = [3,1,5], students = student_info)
+
+    <h1>Random Numbers</h1>
+    {% for number in random_numbers %}
+        <p>{{ number }}</p>
+    {% endfor %}
+    <h1>Students</h1>
+    {% for student in students %}
+        <p>{{ student['name'] }} - {{ student['age'] }}</p>
+    {% endfor %}
+
